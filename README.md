@@ -20,7 +20,7 @@ The main files of interest are:
 Others are included (and will be extended) by way of example.
 
 ## Philosophy
-Javascript applications are complex, and managing that complexity is increasingly burdensome. We aim to ease that burden by making it easier for applications to compose functional structures, providing scoped services via a naturally intuitive, but thoughtful way.
+Javascript applications are complex, and managing that complexity is increasingly burdensome. We aim to ease that burden by making it easier for applications to compose functional structures, providing scoped services in a naturally intuitive, but thoughtful way.
 
 ## Approach
 The DOM is a hierarchical data structure, we exploit that structure to provide a mechanism for ltn-elements to access composed sets of services scoped against the DOM hierarchy. `_queryService` and `_getService` are the cornerstones of the approach.
@@ -75,12 +75,6 @@ function connectedCallback() {
   trader?.registerService(LtnTime, 'time');
   ...
 }
-
-// Page1
-function connectedCallback() {
-  ...
-  this._db = this._getService
-}
 ```
 
 In this example as the App is connected into the DOM it 'queries' for the Trader and uses it to register some services that it wants to make available globally. More on Traders later.
@@ -121,7 +115,6 @@ function connectedCallback() {
   this._db = this._getService(LtnDb);
 }
 ```
-
 
 Traders provide a little more fine control for publishing services through child nodes, allowing the application programmers to create Nodes that bring together services that aren't necessarily part of the same local DOM hierarchy. 
 
