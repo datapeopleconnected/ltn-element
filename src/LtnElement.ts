@@ -3,7 +3,6 @@ import { LtnLogger as Logger, LtnLogLevel as LogLevel } from './LtnLogger.js';
 
 export enum LtnElementScope {
   ROOT = 'ROOT',
-  TRADER = 'TRADER',
   AGGREGATE = 'AGGREGATE',
   COMPOSITE = 'COMPOSITE',
   CHILD = 'CHILD'
