@@ -7,14 +7,6 @@ export interface LtnTraderService {
   service: LtnElement;
 }
 
-export interface LtnTraderRequestCallback {
-  (service: LtnTrader): void;
-}
-export interface LtnTraderRequest {
-  stack: LtnTrader[];
-  callback: LtnTraderRequestCallback;
-}
-
 export class LtnTrader extends LtnElement {
   private __services: Array<LtnTraderService>;
 

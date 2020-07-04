@@ -9,13 +9,6 @@ export enum LtnElementScope {
   CHILD = 'CHILD'
 }
 
-export interface LtnElementRequestCallback {
-  (root: LtnElement): void;
-}
-export interface LtnElementRequest {
-  callback: LtnElementRequestCallback;
-}
-
 export class LtnElement extends LitElement {
   private __logger: Logger = new Logger(this.tagName.toLowerCase());
   private __scope: LtnElementScope = LtnElementScope.CHILD;
