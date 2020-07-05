@@ -1,10 +1,12 @@
 export enum LtnLogLevel {
-  ERROR = 0,
-  WARN = 1,
-  INFO = 2,
-  VERBOSE = 3,
-  DEBUG = 4
+  ERROR,
+  WARN,
+  INFO,
+  VERBOSE,
+  DEBUG
 }
+
+export type LtnLogLevelStrings = keyof typeof LtnLogLevel;
 
 export class LtnLogger {
   protected _level: LtnLogLevel = LtnLogLevel.INFO;
@@ -20,6 +22,10 @@ export class LtnLogger {
 
   set level(level: LtnLogLevel) {
     this._level = level;
+  }
+
+  set label(label: string) {
+    this._label = label;
   }
 
   set disable(disable: boolean) {

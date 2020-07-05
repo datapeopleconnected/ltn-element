@@ -1,5 +1,9 @@
 import { LitElement } from "lit-element";
-import { LtnLogger as Logger, LtnLogLevel as LogLevel } from './LtnLogger.js';
+import { 
+  LtnLogger as Logger, 
+  LtnLogLevel as LogLevel, 
+  LtnLogLevelStrings as LogLevelStrings 
+} from './LtnLogger.js';
 
 export enum LtnElementScope {
   ROOT = 'ROOT',
@@ -13,7 +17,6 @@ export class LtnElement extends LitElement {
   private __scope: LtnElementScope = LtnElementScope.CHILD;
   protected _root: LtnElement | null = null;
 
-
   constructor() {
     super();    
   }
@@ -22,6 +25,7 @@ export class LtnElement extends LitElement {
     super.connectedCallback();
     this.__initScope();
     this.__initRoot();
+    this.__initLogger();
 
     this._info(`Scope:${this.__scope}`);
   }
@@ -45,6 +49,24 @@ export class LtnElement extends LitElement {
       scope = LtnElementScope.CHILD;
     }
     this.__scope = scope as LtnElementScope;
+  }
+
+  private __initLogger() {
+    const ll: string | null = this.getAttribute('log-level');
+    if (ll !== null) {
+      const logLevel: LogLevelStrings = ll.toUpperCase() as LogLevelStrings;
+      if (logLevel !== null && LogLevel[logLevel] !== undefined) {
+        this.__logger.level = LogLevel[logLevel];
+      }  
+    }
+    const logLabel: string | null = this.getAttribute('log-label');
+    if (logLabel !== null) {
+      this.__logger.label = logLabel.toLowerCase();
+    }
+    const logDisable: string | null = this.getAttribute('log-disable');
+    if (logDisable !== null) {
+      this.__logger.disable = true;
+    }
   }
 
   _queryService<T extends LtnElement>(Type: new () => T, scope: LtnElementScope=LtnElementScope.AGGREGATE, name=''): T | null {

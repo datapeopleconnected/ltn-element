@@ -5,7 +5,6 @@ import './bjs-db-service.js';
 import './ltn-trader.js';
 import { BjsDbService } from './BjsDbService.js';
 import { LtnTrader } from './LtnTrader.js';
-import { LtnLogLevel as LogLevel } from './LtnLogger.js';
 
 export class LtnTestTs extends LtnElement {
 
@@ -58,7 +57,6 @@ export class LtnTestTs extends LtnElement {
   constructor() {
     super();
     // LtnLogger.disableLogging = true;
-    this._logLevel = LogLevel.DEBUG;
   }
 
   async connectedCallback() {

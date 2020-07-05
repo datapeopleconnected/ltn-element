@@ -1,6 +1,5 @@
 import { html, css } from 'lit-element';
 import { LtnElement } from './LtnElement.js';
-// import { LtnLogLevel } from './LtnLogger.js';
 
 export class BjsDbService extends LtnElement {
   static styles = css`  
@@ -11,7 +10,6 @@ export class BjsDbService extends LtnElement {
 
   constructor() {
     super();
-    // this._logLevel = LtnLogLevel.DEBUG;
   }
 
   async connectedCallback() {
