@@ -48,42 +48,19 @@ export class LtnElement extends LitElement {
     return service;
   }
 
-  protected _queryParentService<T extends LtnElement>(Type: new () => T): T | null {
-    let parent: Node | null = this.parentNode;
-    let result: T | null = null;
-
-    while (parent !== null) {
-      if (parent instanceof LtnElement) {
-        const parentEl: LtnElement = parent as LtnElement;
-        result = parentEl._queryService(Type);
-        if (result) {
-          break;
-        }
-      }
-
-      if (parent instanceof ShadowRoot) {
-        parent = (parent as ShadowRoot).host;
-      } else {
-        parent = parent.parentNode;
-      }
-    }
-
-    return result;
-  }
-
-  _error(...args: unknown[]) {
+  protected _error(...args: unknown[]) {
     this?.__logger.error(...args);
   }
-  _warn(...args: unknown[]) {
+  protected _warn(...args: unknown[]) {
     this?.__logger.warn(...args);
   }
-  _info(...args: unknown[]) {
+  protected _info(...args: unknown[]) {
     this?.__logger.info(...args);
   }
-  _verbose(...args: unknown[]) {
+  protected _verbose(...args: unknown[]) {
     this?.__logger.verbose(...args);
   }
-  _debug(...args: unknown[]) {
+  protected _debug(...args: unknown[]) {
     this?.__logger.debug(...args);
   }
 

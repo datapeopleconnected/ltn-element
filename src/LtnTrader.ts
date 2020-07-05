@@ -41,7 +41,7 @@ export class LtnTrader extends LtnElement {
   getService<T extends LtnElement>(Type: new () => T, serviceName=''): T | null {
     let service: T | null = this.__findService(Type, serviceName);
     while (service === null) {
-      const trader: LtnTrader | null = this._queryParentService(LtnTrader);
+      const trader: LtnTrader | null = this._findParentTrader();
       if (trader === null) break;
       service = trader.__findService(Type, serviceName);
     }
@@ -57,6 +57,26 @@ export class LtnTrader extends LtnElement {
 
     if (services.length > 0) return services[0];
     return null;
+  }
+
+  private _findParentTrader(): LtnTrader | null {
+    let parent: Node | null = this.parentNode;
+    let result: LtnTrader | null = null;
+
+    while (parent !== null) {
+      if (parent instanceof LtnTrader) {
+        result = parent as LtnTrader;
+        break;
+      }
+
+      if (parent instanceof ShadowRoot) {
+        parent = (parent as ShadowRoot).host;
+      } else {
+        parent = parent.parentNode;
+      }
+    }
+
+    return result;
   }
 
   render() {
