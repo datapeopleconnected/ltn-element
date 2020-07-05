@@ -1,6 +1,5 @@
 import { html, css } from 'lit-element';
 import { LtnElement } from './LtnElement.js';
-// import { LtnLogLevel } from './LtnLogger.js';
 
 export interface LtnTraderService {
   name: string;
@@ -18,7 +17,6 @@ export class LtnTrader extends LtnElement {
 
   constructor() {
     super();
-    // this._logLevel = LtnLogLevel.DEBUG;
     this.__services = new Array<LtnTraderService>();
   }
 
@@ -37,37 +35,28 @@ export class LtnTrader extends LtnElement {
   }
 
   getNamedService<T extends LtnElement>(Type: new  () => T, serviceName: string): T | null {
-    let services: T[] = this.__services
-      .filter(s => s.name === serviceName)
-      .map(s => s.service._queryService(Type))
-      .filter(s => s) as T[];
-
-    while (!services) {
-      const trader: LtnTrader | null = this._queryParentService(LtnTrader);
-      if (trader === null) break;
-      services = this.__services
-        .filter(s => s.name === serviceName)
-        .map(s => s.service._queryService(Type))
-        .filter(s => s) as T[];
-    }
-
-    return services.length > 0 ? services[0] : null;
+    return this.getService(Type, serviceName);
   }
 
-  getService<T extends LtnElement>(Type: new () => T): T | null {
-    let services: T[] = this.__services
+  getService<T extends LtnElement>(Type: new () => T, serviceName=''): T | null {
+    let service: T | null = this.__findService(Type, serviceName);
+    while (service === null) {
+      const trader: LtnTrader | null = this._queryParentService(LtnTrader);
+      if (trader === null) break;
+      service = trader.__findService(Type, serviceName);
+    }
+
+    return service;
+  }
+
+  private __findService<T extends LtnElement>(Type: new () => T, serviceName: string): T | null {
+    const services: T[] = this.__services
+      .filter(s => serviceName === '' || s.name === serviceName)  
       .map(s => s.service._queryService(Type))
       .filter(s => s) as T[];
 
-    while (!services) {
-      const trader: LtnTrader | null = this._queryParentService(LtnTrader);
-      if (trader === null) break;
-      services = this.__services
-        .map(s => s.service._queryService(Type))
-        .filter(s => s) as T[];
-    }
-
-    return services.length > 0 ? services[0] : null;
+    if (services.length > 0) return services[0];
+    return null;
   }
 
   render() {
