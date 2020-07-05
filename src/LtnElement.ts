@@ -27,7 +27,64 @@ export class LtnElement extends LitElement {
     this.__initRoot();
     this.__initLogger();
 
-    this._info(`Scope:${this.__scope}`);
+    this._verbose(`Scope:${this.__scope}`);
+  }
+
+  _queryService<T extends LtnElement>(Type: new () => T, scope: LtnElementScope=LtnElementScope.AGGREGATE, name=''): T | null {
+    let service: T | null = null;
+    this._debug(`${this.constructor.name} === ${Type.name}`);
+    if (this.constructor.name === Type.name) {
+      if (name === '' || name === this.id)
+      return (this as unknown) as T;
+    }
+    const children = this?.shadowRoot?.childNodes;
+    children?.forEach(c => {
+      if (service !== null || !(c instanceof LtnElement)) return;
+      const el = (c as LtnElement);
+      if (c.__scope !== scope) return;
+
+      service = el._queryService(Type, scope, name);
+    });
+    return service;
+  }
+
+  protected _queryParentService<T extends LtnElement>(Type: new () => T): T | null {
+    let parent: Node | null = this.parentNode;
+    let result: T | null = null;
+
+    while (parent !== null) {
+      if (parent instanceof LtnElement) {
+        const parentEl: LtnElement = parent as LtnElement;
+        result = parentEl._queryService(Type);
+        if (result) {
+          break;
+        }
+      }
+
+      if (parent instanceof ShadowRoot) {
+        parent = (parent as ShadowRoot).host;
+      } else {
+        parent = parent.parentNode;
+      }
+    }
+
+    return result;
+  }
+
+  _error(...args: unknown[]) {
+    this?.__logger.error(...args);
+  }
+  _warn(...args: unknown[]) {
+    this?.__logger.warn(...args);
+  }
+  _info(...args: unknown[]) {
+    this?.__logger.info(...args);
+  }
+  _verbose(...args: unknown[]) {
+    this?.__logger.verbose(...args);
+  }
+  _debug(...args: unknown[]) {
+    this?.__logger.debug(...args);
   }
 
   private __initRoot() {
@@ -69,25 +126,7 @@ export class LtnElement extends LitElement {
     }
   }
 
-  _queryService<T extends LtnElement>(Type: new () => T, scope: LtnElementScope=LtnElementScope.AGGREGATE, name=''): T | null {
-    let service: T | null = null;
-    this._debug(`${this.constructor.name} === ${Type.name}`);
-    if (this.constructor.name === Type.name) {
-      if (name === '' || name === this.id)
-      return (this as unknown) as T;
-    }
-    const children = this?.shadowRoot?.childNodes;
-    children?.forEach(c => {
-      if (service !== null || !(c instanceof LtnElement)) return;
-      const el = (c as LtnElement);
-      if (c.__scope !== scope) return;
-
-      service = el._queryService(Type, scope, name);
-    });
-    return service;
-  }
-
-  protected _queryParentScope(scope: LtnElementScope): LtnElement | null {
+  private _queryParentScope(scope: LtnElementScope): LtnElement | null {
     let parent: Node | null = this.parentNode;
     let result: LtnElement | null = null;
 
@@ -108,47 +147,5 @@ export class LtnElement extends LitElement {
     }
 
     return result;
-  }
-
-  protected _queryParentService<T extends LtnElement>(Type: new () => T): T | null {
-    let parent: Node | null = this.parentNode;
-    let result: T | null = null;
-
-    while (parent !== null) {
-      if (parent instanceof LtnElement) {
-        const parentEl: LtnElement = parent as LtnElement;
-        result = parentEl._queryService(Type);
-        if (result) {
-          break;
-        }
-      }
-
-      if (parent instanceof ShadowRoot) {
-        parent = (parent as ShadowRoot).host;
-      } else {
-        parent = parent.parentNode;
-      }
-    }
-
-    return result;
-  }
-
-  protected set _logLevel(logLevel: LogLevel) {
-    this.__logger.level = logLevel;
-  }
-  _error(...args: unknown[]) {
-    this?.__logger.error(...args);
-  }
-  _warn(...args: unknown[]) {
-    this?.__logger.warn(...args);
-  }
-  _info(...args: unknown[]) {
-    this?.__logger.info(...args);
-  }
-  _verbose(...args: unknown[]) {
-    this?.__logger.verbose(...args);
-  }
-  _debug(...args: unknown[]) {
-    this?.__logger.debug(...args);
   }
 }

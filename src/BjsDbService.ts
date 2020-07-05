@@ -12,7 +12,7 @@ export class BjsDbService extends LtnElement {
     super();
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     this._debug(`connectedCallback`);
   }
