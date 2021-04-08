@@ -3,7 +3,7 @@ export enum LtnLogLevel {
   WARN,
   INFO,
   VERBOSE,
-  DEBUG
+  DEBUG,
 }
 
 export type LtnLogLevelStrings = keyof typeof LtnLogLevel;
@@ -14,8 +14,8 @@ export class LtnLogger {
   private _disable = false;
 
   static disableLogging = false;
-  
-  constructor(label: string, level: LtnLogLevel=LtnLogLevel.INFO) {
+
+  constructor(label: string, level: LtnLogLevel = LtnLogLevel.INFO) {
     this._label = label;
     this._level = level;
   }
@@ -37,30 +37,46 @@ export class LtnLogger {
   }
 
   warn(..._args: unknown[]) {
-    if (LtnLogger.disableLogging === false && this._disable === false && this._level >= LtnLogLevel.WARN) {
+    if (
+      LtnLogger.disableLogging === false &&
+      this._disable === false &&
+      this._level >= LtnLogLevel.WARN
+    ) {
       const args: unknown[] = ['[WARN]', `[${this._label}]`, ..._args];
       console.warn(...args);
     }
   }
 
   info(..._args: unknown[]) {
-    if (LtnLogger.disableLogging === false && this._disable === false && this._level >= LtnLogLevel.INFO) {
+    if (
+      LtnLogger.disableLogging === false &&
+      this._disable === false &&
+      this._level >= LtnLogLevel.INFO
+    ) {
       const args: unknown[] = ['[INFO]', `[${this._label}]`, ..._args];
       console.info(...args);
     }
   }
 
   verbose(..._args: unknown[]) {
-    if (LtnLogger.disableLogging === false && this._disable === false && this._level >= LtnLogLevel.VERBOSE) {
+    if (
+      LtnLogger.disableLogging === false &&
+      this._disable === false &&
+      this._level >= LtnLogLevel.VERBOSE
+    ) {
       const args: unknown[] = ['[VERBOSE]', `[${this._label}]`, ..._args];
       console.log(...args);
     }
   }
 
   debug(..._args: unknown[]) {
-    if (LtnLogger.disableLogging === false && this._disable === false && this._level >= LtnLogLevel.DEBUG) {
+    if (
+      LtnLogger.disableLogging === false &&
+      this._disable === false &&
+      this._level >= LtnLogLevel.DEBUG
+    ) {
       const args: unknown[] = ['[DEBUG]', `[${this._label}]`, ..._args];
-      console.debug(...args);
+      console.log(...args);
     }
   }
 }

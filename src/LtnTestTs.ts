@@ -1,16 +1,23 @@
 import { html, css, property } from 'lit-element';
-import { LtnElement, LtnElementScope as Scope, LtnElementScope } from './LtnElement.js';
+import {
+  LtnElement,
+  LtnElementScope as Scope,
+  LtnElementScope,
+} from './LtnElement.js';
 import { openWcLogo } from './open-wc-logo.js';
+
 import './bjs-db-service.js';
 import './ltn-trader.js';
+import './ltn-settings-service.js';
+
 import { BjsDbService } from './BjsDbService.js';
 import { LtnTrader } from './LtnTrader.js';
+import { LtnSettingsService } from './LtnSettingsService.js';
 
 export class LtnTestTs extends LtnElement {
-
-  @property({type: String}) page = 'main';
-  @property({type: String}) title = '';
-  @property({type: Object, attribute: false}) Scope = Scope; 
+  @property({ type: String }) page = 'main';
+  @property({ type: String }) title = '';
+  @property({ type: Object, attribute: false }) Scope = Scope;
 
   static styles = css`
     :host {
@@ -24,6 +31,9 @@ export class LtnTestTs extends LtnElement {
       max-width: 960px;
       margin: 0 auto;
       text-align: center;
+    }
+
+    @use {
     }
 
     main {
@@ -52,11 +62,15 @@ export class LtnTestTs extends LtnElement {
     .app-footer a {
       margin-left: 5px;
     }
+
+    mwc-top-app-bar {
+      --mdc-theme-primary: orange;
+      --mdc-theme-on-primary: black;
+    }
   `;
 
   constructor() {
     super();
-    // LtnLogger.disableLogging = true;
   }
 
   async connectedCallback() {
@@ -64,24 +78,46 @@ export class LtnTestTs extends LtnElement {
     await this.updateComplete;
 
     const trader: LtnTrader | null = this._queryService(LtnTrader);
-    const dbService: BjsDbService | null = this._queryService(BjsDbService, LtnElementScope.CHILD);
-    this._debug('register with trader', trader, dbService);
+    if (trader !== null) {
+      this._traderStack.push(trader);
+    }
+
+    const settingsService: LtnSettingsService | null = this._queryService(
+      LtnSettingsService,
+      LtnElementScope.CHILD
+    );
+    this._debug('register with trader', settingsService);
+    if (settingsService) {
+      trader?.registerService({
+        name: 'settings',
+        service: settingsService,
+      });
+    }
+
+    const dbService: BjsDbService | null = this._queryService(BjsDbService);
+    this._debug('register with trader', dbService);
     if (dbService) {
       trader?.registerService({
         name: 'db',
-        service: dbService
-      });  
+        service: dbService,
+      });
     }
-    this._debug('connectedCallback', trader?.getService(BjsDbService));
+
+    this._debug('connectedCallback');
   }
-  
+
   render() {
     return html`
-      <ltn-trader scope="${Scope.AGGREGATE}"></ltn-trader>
-      <bjs-db-service></bjs-db-service>
+      <ltn-trader scope="${Scope.AGGREGATE}" log-level=""></ltn-trader>
+      <ltn-settings-service log-level="verbose"></ltn-settings-service>
+      <bjs-db-service
+        scope="${Scope.AGGREGATE}"
+        log-level="verbose"
+      ></bjs-db-service>
+
       <main>
         <div class="logo">${openWcLogo}</div>
-        <h1>My APP</h1>
+        <h1>The APP</h1>
 
         <p>Edit <code>src/LtnTestTs.js</code> and save to reload.</p>
         <a
@@ -93,7 +129,6 @@ export class LtnTestTs extends LtnElement {
           Code examples
         </a>
       </main>
-
       <p class="app-footer">
         🚽 Made with love by
         <a

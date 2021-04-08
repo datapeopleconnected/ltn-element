@@ -7,6 +7,9 @@
   <meta name="Description" content="Put your description here.">
   <base href="/">
 
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
+
   <style>
     html,
     body {
@@ -15,12 +18,18 @@
       font-family: sans-serif;
       background-color: #ededed;
     }
+
   </style>
+  
   <title>ltn-test-ts</title>
 </head>
 
 <body>
-  <ltn-test-ts scope="ROOT" log-disable log-level="debug" log-label="ltn-test"></ltn-test-ts>
+  <!-- <mwc-button id="myButton" icon="code" label="Click Me!" outlined></mwc-button>
+  <script type="module">
+    import '@material/mwc-button';
+  </script> -->
+  <ltn-test-ts scope="ROOT" log-level="" log-label="ltn-test"></ltn-test-ts>
 
   <script type="module" src="./out-tsc/src/ltn-test-ts.js"></script>
 </body>

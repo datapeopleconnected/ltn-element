@@ -34,12 +34,19 @@ export class LtnTrader extends LtnElement {
     this.__services.push(service);
   }
 
-  getNamedService<T extends LtnElement>(Type: new  () => T, serviceName: string): T | null {
+  getNamedService<T extends LtnElement>(
+    Type: new () => T,
+    serviceName: string
+  ): T | null {
     return this.getService(Type, serviceName);
   }
 
-  getService<T extends LtnElement>(Type: new () => T, serviceName=''): T | null {
+  getService<T extends LtnElement>(
+    Type: new () => T,
+    serviceName = ''
+  ): T | null {
     let service: T | null = this.__findService(Type, serviceName);
+    // this._debug(this.__services);
     while (service === null) {
       const trader: LtnTrader | null = this._findParentTrader();
       if (trader === null) break;
@@ -49,9 +56,12 @@ export class LtnTrader extends LtnElement {
     return service;
   }
 
-  private __findService<T extends LtnElement>(Type: new () => T, serviceName: string): T | null {
+  private __findService<T extends LtnElement>(
+    Type: new () => T,
+    serviceName: string
+  ): T | null {
     const services: T[] = this.__services
-      .filter(s => serviceName === '' || s.name === serviceName)  
+      .filter(s => serviceName === '' || s.name === serviceName)
       .map(s => s.service._queryService(Type))
       .filter(s => s) as T[];
 
@@ -80,7 +90,6 @@ export class LtnTrader extends LtnElement {
   }
 
   render() {
-    return html`
-    `;
+    return html``;
   }
 }
