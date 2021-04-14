@@ -109,7 +109,7 @@ export class LtnTestTs extends LtnElement {
   render() {
     return html`
       <ltn-trader scope="${Scope.AGGREGATE}" log-level=""></ltn-trader>
-      <ltn-settings-service log-level="verbose"></ltn-settings-service>
+      <ltn-settings-service log-level=""></ltn-settings-service>
       <bjs-db-service
         scope="${Scope.AGGREGATE}"
         log-level="verbose"

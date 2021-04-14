@@ -45,11 +45,24 @@ export class LtnElement extends LitElement {
     if (this.constructor.name === Type.name) {
       if (name === '' || name === this.id) return (this as unknown) as T;
     }
+
+    // in aggregate structures check your parent before checking children, but only immediate parent
+    if (scope === LtnElementScope.AGGREGATE) {
+      const parent: LtnElement | null = this.__getParentLtnElement();
+      if (parent) {
+        if (parent.constructor.name === Type.name) {
+          if (name === '' || name === parent.id) {
+            return (parent as unknown) as T;
+          }
+        }
+      }
+    }
+
     const children = this?.shadowRoot?.childNodes;
     children?.forEach(c => {
       if (service !== null || !(c instanceof LtnElement)) return;
       const el = c as LtnElement;
-      if (c.__scope !== scope) return;
+      if (el.__scope !== scope) return;
 
       service = el._queryService(Type, scope, name);
     });
@@ -67,7 +80,7 @@ export class LtnElement extends LitElement {
           `_getService`,
           parentEl,
           parentEl._traderStack[0],
-          parentEl._traderStack[0].getService(Type)
+          parentEl._traderStack[0]?.getService(Type)
         );
         result = parentEl._traderStack.reduce<T | null>((curr, next) => {
           if (curr) return curr;
@@ -110,7 +123,7 @@ export class LtnElement extends LitElement {
     if (this.__scope === LtnElementScope.ROOT) {
       this._root = this;
     } else {
-      this._root = this._queryParentScope(LtnElementScope.ROOT);
+      this._root = this.__queryParentScope(LtnElementScope.ROOT);
       this._debug('__initRoot', this._root);
       if (this._root === null) {
         throw new Error(`Missing root element`);
@@ -144,7 +157,27 @@ export class LtnElement extends LitElement {
     }
   }
 
-  private _queryParentScope(scope: LtnElementScope): LtnElement | null {
+  private __getParentLtnElement(): LtnElement | null {
+    let parent: Node | null = this.parentNode;
+    let result: LtnElement | null = null;
+
+    while (parent !== null) {
+      if (parent instanceof LtnElement) {
+        result = parent as LtnElement;
+        break;
+      }
+
+      if (parent instanceof ShadowRoot) {
+        parent = (parent as ShadowRoot).host;
+      } else {
+        parent = parent.parentNode;
+      }
+    }
+
+    return result;
+  }
+
+  private __queryParentScope(scope: LtnElementScope): LtnElement | null {
     let parent: Node | null = this.parentNode;
     let result: LtnElement | null = null;
 

@@ -1,11 +1,12 @@
 import { html, css, property } from 'lit-element';
-import { LtnElement } from './LtnElement.js';
+import { LtnElement, LtnElementScope as Scope } from './LtnElement.js';
 import { LtnSettingsService, ButtressSettings } from './LtnSettingsService.js';
+import './bjs-db-schema.js';
 
 export class BjsDbService extends LtnElement {
   static styles = css`
     :host {
-      display: block;
+      display: none;
     }
   `;
 
@@ -28,15 +29,8 @@ export class BjsDbService extends LtnElement {
     this.__settings = settingsService
       ? settingsService.getButtressSettings()
       : null;
-    this._verbose(this.__settings);
 
-    if (this.__settings) {
-      const response = await fetch(this.__settings.endpoint);
-      const body = await response.json();
-      this._verbose(body);
-    }
-
-    this._debug(`connectedCallback`);
+    this._debug(`connectedCallback`, this.__settings);
   }
 
   disconnectedCallback() {
@@ -45,6 +39,11 @@ export class BjsDbService extends LtnElement {
   }
 
   render() {
-    return html``;
+    return html`
+      <bjs-db-schema
+        scope="${Scope.AGGREGATE}"
+        log-level="verbose"
+      ></bjs-db-schema>
+    `;
   }
 }
