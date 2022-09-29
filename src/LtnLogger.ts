@@ -2,7 +2,6 @@ export enum LtnLogLevel {
   ERROR,
   WARN,
   INFO,
-  VERBOSE,
   DEBUG,
 }
 
@@ -58,17 +57,6 @@ export class LtnLogger {
     }
   }
 
-  verbose(..._args: unknown[]) {
-    if (
-      LtnLogger.disableLogging === false &&
-      this._disable === false &&
-      this._level >= LtnLogLevel.VERBOSE
-    ) {
-      const args: unknown[] = ['[VERBOSE]', `[${this._label}]`, ..._args];
-      console.log(...args);
-    }
-  }
-
   debug(..._args: unknown[]) {
     if (
       LtnLogger.disableLogging === false &&
@@ -76,7 +64,7 @@ export class LtnLogger {
       this._level >= LtnLogLevel.DEBUG
     ) {
       const args: unknown[] = ['[DEBUG]', `[${this._label}]`, ..._args];
-      console.log(...args);
+      console.debug(...args);
     }
   }
 }

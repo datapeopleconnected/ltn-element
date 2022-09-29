@@ -1,4 +1,4 @@
-import { html, css } from 'lit-element';
+import { html, css } from 'lit';
 import { LtnElement } from './LtnElement.js';
 
 export interface LtnTraderService {
@@ -17,7 +17,7 @@ export class LtnTrader extends LtnElement {
 
   constructor() {
     super();
-    this.__services = new Array<LtnTraderService>();
+    this.__services = [];
   }
 
   connectedCallback() {

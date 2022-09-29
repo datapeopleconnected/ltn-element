@@ -1,26 +1,1205 @@
 {
-  "version": 2,
-  "tags": [
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
     {
-      "name": "ltn-test-ts",
-      "description": "An application with a title and an action counter",
-      "properties": [
+      "kind": "javascript-module",
+      "path": "src/LtnElement.ts",
+      "declarations": [
         {
-          "name": "title",
-          "type": "String",
-          "description": "The title of your application",
-          "default": "Hey there"
-        },
-        {
-          "name": "page",
-          "type": "String",
-          "description": "Which page to show",
-          "default": "main"
+          "kind": "class",
+          "description": "",
+          "name": "LtnElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "__logger",
+              "type": {
+                "text": "Logger"
+              },
+              "privacy": "private",
+              "default": "new Logger(this.tagName.toLowerCase())"
+            },
+            {
+              "kind": "field",
+              "name": "__scope",
+              "type": {
+                "text": "LtnElementScope"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_root",
+              "type": {
+                "text": "LtnElement | null"
+              },
+              "privacy": "protected",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "_traderStack",
+              "type": {
+                "text": "Array<LtnTrader>"
+              },
+              "privacy": "protected",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "logLevel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'info'",
+              "attribute": "logLevel"
+            },
+            {
+              "kind": "method",
+              "name": "_queryService",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                },
+                {
+                  "name": "scope",
+                  "default": "LtnElementScope.AGGREGATE",
+                  "type": {
+                    "text": "LtnElementScope"
+                  }
+                },
+                {
+                  "name": "name",
+                  "default": "''"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_getService",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_error",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_warn",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_info",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_debug",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "__initRoot",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "__initScope",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "__initLogger",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "__getParentLtnElement",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "LtnElement | null"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__queryParentScope",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "LtnElement | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "scope",
+                  "type": {
+                    "text": "LtnElementScope"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "logLevel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'info'",
+              "fieldName": "logLevel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
         }
       ],
-      "events": [],
-      "slots": [],
-      "cssProperties": []
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LtnElement",
+          "declaration": {
+            "name": "LtnElement",
+            "module": "src/LtnElement.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/LtnLogger.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LtnLogger",
+          "members": [
+            {
+              "kind": "field",
+              "name": "_level",
+              "type": {
+                "text": "LtnLogLevel"
+              },
+              "privacy": "protected",
+              "default": "level"
+            },
+            {
+              "kind": "field",
+              "name": "_label",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "label"
+            },
+            {
+              "kind": "field",
+              "name": "_disable",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "disableLogging",
+              "type": {
+                "text": "boolean"
+              },
+              "static": true,
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "level"
+            },
+            {
+              "kind": "field",
+              "name": "label"
+            },
+            {
+              "kind": "field",
+              "name": "disable"
+            },
+            {
+              "kind": "method",
+              "name": "error",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "warn",
+              "parameters": [
+                {
+                  "name": "_args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "info",
+              "parameters": [
+                {
+                  "name": "_args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "debug",
+              "parameters": [
+                {
+                  "name": "_args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LtnLogger",
+          "declaration": {
+            "name": "LtnLogger",
+            "module": "src/LtnLogger.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/LtnService.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LtnService",
+          "members": [
+            {
+              "kind": "method",
+              "name": "get",
+              "return": {
+                "type": {
+                  "text": "any"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "path",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "set",
+              "return": {
+                "type": {
+                  "text": "string|undefined"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "path",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "subscribe",
+              "parameters": [
+                {
+                  "name": "path",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "cb",
+                  "type": {
+                    "text": "Function"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "unsubscribe"
+            },
+            {
+              "kind": "field",
+              "name": "__logger",
+              "type": {
+                "text": "Logger"
+              },
+              "privacy": "private",
+              "default": "new Logger(this.tagName.toLowerCase())",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "__scope",
+              "type": {
+                "text": "LtnElementScope"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_root",
+              "type": {
+                "text": "LtnElement | null"
+              },
+              "privacy": "protected",
+              "default": "null",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_traderStack",
+              "type": {
+                "text": "Array<LtnTrader>"
+              },
+              "privacy": "protected",
+              "default": "[]",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "logLevel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'info'",
+              "attribute": "logLevel",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_queryService",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                },
+                {
+                  "name": "scope",
+                  "default": "LtnElementScope.AGGREGATE",
+                  "type": {
+                    "text": "LtnElementScope"
+                  }
+                },
+                {
+                  "name": "name",
+                  "default": "''"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_getService",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_error",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_warn",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_info",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_debug",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__initRoot",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__initScope",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__initLogger",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__getParentLtnElement",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "LtnElement | null"
+                }
+              },
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__queryParentScope",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "LtnElement | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "scope",
+                  "type": {
+                    "text": "LtnElementScope"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "LtnElement",
+            "module": "/src/LtnElement.js"
+          },
+          "attributes": [
+            {
+              "name": "logLevel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'info'",
+              "fieldName": "logLevel",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LtnService",
+          "declaration": {
+            "name": "LtnService",
+            "module": "src/LtnService.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/LtnTrader.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LtnTrader",
+          "members": [
+            {
+              "kind": "field",
+              "name": "__services",
+              "type": {
+                "text": "Array<LtnTraderService>"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "method",
+              "name": "registerService",
+              "parameters": [
+                {
+                  "name": "service",
+                  "type": {
+                    "text": "LtnTraderService"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getNamedService",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                },
+                {
+                  "name": "serviceName",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getService",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                },
+                {
+                  "name": "serviceName",
+                  "default": "''"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "__findService",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                },
+                {
+                  "name": "serviceName",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_findParentTrader",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "LtnTrader | null"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "__logger",
+              "type": {
+                "text": "Logger"
+              },
+              "privacy": "private",
+              "default": "new Logger(this.tagName.toLowerCase())",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "__scope",
+              "type": {
+                "text": "LtnElementScope"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_root",
+              "type": {
+                "text": "LtnElement | null"
+              },
+              "privacy": "protected",
+              "default": "null",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_traderStack",
+              "type": {
+                "text": "Array<LtnTrader>"
+              },
+              "privacy": "protected",
+              "default": "[]",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "logLevel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'info'",
+              "attribute": "logLevel",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_queryService",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                },
+                {
+                  "name": "scope",
+                  "default": "LtnElementScope.AGGREGATE",
+                  "type": {
+                    "text": "LtnElementScope"
+                  }
+                },
+                {
+                  "name": "name",
+                  "default": "''"
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_getService",
+              "return": {
+                "type": {
+                  "text": "T | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Type",
+                  "type": {
+                    "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_error",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_warn",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_info",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_debug",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__initRoot",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__initScope",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__initLogger",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__getParentLtnElement",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "LtnElement | null"
+                }
+              },
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "__queryParentScope",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "LtnElement | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "scope",
+                  "type": {
+                    "text": "LtnElementScope"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "LtnElement",
+            "module": "/src/LtnElement.js"
+          },
+          "tagName": "ltn-trader",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "logLevel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'info'",
+              "fieldName": "logLevel",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LtnTrader",
+          "declaration": {
+            "name": "LtnTrader",
+            "module": "src/LtnTrader.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LtnElement",
+          "declaration": {
+            "name": "LtnElement",
+            "module": "./LtnElement.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LtnElementScope",
+          "declaration": {
+            "name": "LtnElementScope",
+            "module": "./LtnElement.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LtnTrader",
+          "declaration": {
+            "name": "LtnTrader",
+            "module": "./LtnTrader.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LtnService",
+          "declaration": {
+            "name": "LtnService",
+            "module": "./LtnService.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/ltn-trader.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "ltn-trader",
+          "declaration": {
+            "name": "LtnTrader",
+            "module": "/src/LtnTrader.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "stories/index.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Regular"
+        },
+        {
+          "kind": "variable",
+          "name": "CustomTitle"
+        },
+        {
+          "kind": "variable",
+          "name": "CustomCounter"
+        },
+        {
+          "kind": "variable",
+          "name": "SlottedContent"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Regular",
+          "declaration": {
+            "name": "Regular",
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CustomTitle",
+          "declaration": {
+            "name": "CustomTitle",
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CustomCounter",
+          "declaration": {
+            "name": "CustomCounter",
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SlottedContent",
+          "declaration": {
+            "name": "SlottedContent",
+            "module": "stories/index.stories.ts"
+          }
+        }
+      ]
     }
   ]
 }
