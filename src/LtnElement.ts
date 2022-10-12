@@ -27,6 +27,8 @@ export class LtnElement extends LitElement {
 
   protected _traderStack: Array<LtnTrader> = [];
 
+  public readonly LtnElementVersion: number = 1;
+
   @property({ type: String })
   logLevel: string = 'info';
 
@@ -64,7 +66,7 @@ export class LtnElement extends LitElement {
 
     const children = this?.shadowRoot?.childNodes;
     children?.forEach(c => {
-      if (service !== null || !(c instanceof LtnElement)) return;
+      if (service !== null || !(c as LtnElement).LtnElementVersion) return;
       const el = c as LtnElement;
       if (el.__scope !== scope) return;
 
@@ -78,7 +80,7 @@ export class LtnElement extends LitElement {
     let result: T | null = null;
 
     while (parent !== null) {
-      if (parent instanceof LtnElement) {
+      if ((parent as LtnElement).LtnElementVersion) {
         const parentEl: LtnElement = parent as LtnElement;
         this._debug(
           `_getService`,
@@ -106,6 +108,10 @@ export class LtnElement extends LitElement {
     return result;
   }
 
+  protected _setLogLevel(level: LogLevel) {
+    this.__logger.level = level;
+  }
+  
   protected _error(...args: unknown[]) {
     this?.__logger.error(...args);
   }
@@ -148,7 +154,7 @@ export class LtnElement extends LitElement {
     if (ll !== null) {
       const logLevel: LogLevelStrings = ll.toUpperCase() as LogLevelStrings;
       if (logLevel !== null && LogLevel[logLevel] !== undefined) {
-        this.__logger.level = LogLevel[logLevel];
+        this._setLogLevel(LogLevel[logLevel]);
       }
     }
   
@@ -168,7 +174,7 @@ export class LtnElement extends LitElement {
     let result: LtnElement | null = null;
 
     while (parent !== null) {
-      if (parent instanceof LtnElement) {
+      if ((parent as LtnElement).LtnElementVersion) {
         result = parent as LtnElement;
         break;
       }
@@ -188,7 +194,7 @@ export class LtnElement extends LitElement {
     let result: LtnElement | null = null;
 
     while (parent !== null) {
-      if (parent instanceof LtnElement) {
+      if ((parent as LtnElement).LtnElementVersion) {
         const parentEl: LtnElement = parent as LtnElement;
         if (parentEl.__scope === scope) {
           result = parentEl;
