@@ -37,19 +37,19 @@ export class LtnTrader extends LtnElement {
   getNamedService<T extends LtnElement>(
     Type: new () => T,
     serviceName: string
-  ): T | null {
+  ): T | undefined {
     return this.getService(Type, serviceName);
   }
 
   getService<T extends LtnElement>(
     Type: new () => T,
     serviceName = ''
-  ): T | null {
-    let service: T | null = this.__findService(Type, serviceName);
+  ): T | undefined {
+    let service = this.__findService(Type, serviceName);
     // this._debug(this.__services);
-    while (service === null) {
-      const trader: LtnTrader | null = this._findParentTrader();
-      if (trader === null) break;
+    while (service === undefined) {
+      const trader = this._findParentTrader();
+      if (trader === undefined) break;
       service = trader.__findService(Type, serviceName);
     }
 
@@ -59,19 +59,19 @@ export class LtnTrader extends LtnElement {
   private __findService<T extends LtnElement>(
     Type: new () => T,
     serviceName: string
-  ): T | null {
+  ): T | undefined {
     const services: T[] = this.__services
       .filter(s => serviceName === '' || s.name === serviceName)
       .map(s => s.service._queryService(Type))
       .filter(s => s) as T[];
 
     if (services.length > 0) return services[0];
-    return null;
+    return undefined;
   }
 
-  private _findParentTrader(): LtnTrader | null {
+  private _findParentTrader(): LtnTrader | undefined {
     let parent: Node | null = this.parentNode;
-    let result: LtnTrader | null = null;
+    let result: LtnTrader | undefined;
 
     while (parent !== null) {
       if (parent instanceof LtnTrader) {

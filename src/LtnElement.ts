@@ -8,7 +8,7 @@ import {
 } from './LtnLogger.js';
 
 interface LtnTrader {
-  getService<T extends LtnElement>(Type: new () => T): T | null;
+  getService<T extends LtnElement>(Type: new () => T): T | undefined;
 }
 
 export enum LtnElementScope {
@@ -23,7 +23,7 @@ export class LtnElement extends LitElement {
 
   private __scope: LtnElementScope = LtnElementScope.CHILD;
 
-  protected _root: LtnElement | null = null;
+  protected _root?: LtnElement;
 
   protected _traderStack: Array<LtnTrader> = [];
 
@@ -45,8 +45,8 @@ export class LtnElement extends LitElement {
     Type: new () => T,
     scope: LtnElementScope = LtnElementScope.AGGREGATE,
     name = ''
-  ): T | null {
-    let service: T | null = null;
+  ): T | undefined {
+    let service: T | undefined;
     this._debug(scope, `${this.constructor.name} === ${Type.name}`);
     if (this.constructor.name === Type.name) {
       if (name === '' || name === this.id) return (this as unknown) as T;
@@ -54,7 +54,7 @@ export class LtnElement extends LitElement {
 
     // in aggregate structures check your parent before checking children, but only immediate parent
     if (scope === LtnElementScope.AGGREGATE) {
-      const parent: LtnElement | null = this.__getParentLtnElement();
+      const parent = this.__getParentLtnElement();
       if (parent) {
         if (parent.constructor.name === Type.name) {
           if (name === '' || name === parent.id) {
@@ -66,7 +66,8 @@ export class LtnElement extends LitElement {
 
     const children = this?.shadowRoot?.childNodes;
     children?.forEach(c => {
-      if (service !== null || !(c as LtnElement).LtnElementVersion) return;
+      if (service !== undefined || !(c as LtnElement).LtnElementVersion) return;
+
       const el = c as LtnElement;
       if (el.__scope !== scope) return;
 
@@ -75,9 +76,9 @@ export class LtnElement extends LitElement {
     return service;
   }
 
-  _getService<T extends LtnElement>(Type: new () => T): T | null {
+  _getService<T extends LtnElement>(Type: new () => T): T | undefined {
     let parent: Node | null = this.parentNode;
-    let result: T | null = null;
+    let result: T | undefined;
 
     while (parent !== null) {
       if ((parent as LtnElement).LtnElementVersion) {
@@ -88,10 +89,10 @@ export class LtnElement extends LitElement {
           parentEl._traderStack[0],
           parentEl._traderStack[0]?.getService(Type)
         );
-        result = parentEl._traderStack.reduce<T | null>((curr, next) => {
+        result = parentEl._traderStack.reduce<T | undefined>((curr, next) => {
           if (curr) return curr;
           return next.getService(Type);
-        }, (null as unknown) as T);
+        }, (undefined as unknown) as T);
 
         if (result) {
           break;
@@ -169,9 +170,9 @@ export class LtnElement extends LitElement {
     }
   }
 
-  private __getParentLtnElement(): LtnElement | null {
+  private __getParentLtnElement(): LtnElement | undefined {
     let parent: Node | null = this.parentNode;
-    let result: LtnElement | null = null;
+    let result: LtnElement | undefined;
 
     while (parent !== null) {
       if ((parent as LtnElement).LtnElementVersion) {
@@ -189,9 +190,9 @@ export class LtnElement extends LitElement {
     return result;
   }
 
-  private __queryParentScope(scope: LtnElementScope): LtnElement | null {
+  private __queryParentScope(scope: LtnElementScope): LtnElement | undefined {
     let parent: Node | null = this.parentNode;
-    let result: LtnElement | null = null;
+    let result: LtnElement | undefined;
 
     while (parent !== null) {
       if ((parent as LtnElement).LtnElementVersion) {
