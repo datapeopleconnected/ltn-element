@@ -32,10 +32,9 @@
               "kind": "field",
               "name": "_root",
               "type": {
-                "text": "LtnElement | null"
+                "text": "LtnElement | undefined"
               },
-              "privacy": "protected",
-              "default": "null"
+              "privacy": "protected"
             },
             {
               "kind": "field",
@@ -69,7 +68,7 @@
               "name": "_queryService",
               "return": {
                 "type": {
-                  "text": "T | null"
+                  "text": "T | undefined"
                 }
               },
               "parameters": [
@@ -97,7 +96,7 @@
               "name": "_getService",
               "return": {
                 "type": {
-                  "text": "T | null"
+                  "text": "T | undefined"
                 }
               },
               "parameters": [
@@ -195,7 +194,7 @@
               "privacy": "private",
               "return": {
                 "type": {
-                  "text": "LtnElement | null"
+                  "text": "LtnElement | undefined"
                 }
               }
             },
@@ -205,7 +204,7 @@
               "privacy": "private",
               "return": {
                 "type": {
-                  "text": "LtnElement | null"
+                  "text": "LtnElement | undefined"
                 }
               },
               "parameters": [
@@ -373,69 +372,25 @@
           "kind": "class",
           "description": "",
           "name": "LtnService",
+          "superclass": {
+            "name": "LtnElement",
+            "module": "/src/LtnElement.js"
+          },
+          "attributes": [
+            {
+              "name": "logLevel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'info'",
+              "fieldName": "logLevel",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            }
+          ],
           "members": [
-            {
-              "kind": "method",
-              "name": "get",
-              "return": {
-                "type": {
-                  "text": "any"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "path",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "set",
-              "return": {
-                "type": {
-                  "text": "string|undefined"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "path",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "value",
-                  "type": {
-                    "text": "any"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "subscribe",
-              "parameters": [
-                {
-                  "name": "path",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "cb",
-                  "type": {
-                    "text": "Function"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "unsubscribe"
-            },
             {
               "kind": "field",
               "name": "__logger",
@@ -465,10 +420,9 @@
               "kind": "field",
               "name": "_root",
               "type": {
-                "text": "LtnElement | null"
+                "text": "LtnElement | undefined"
               },
               "privacy": "protected",
-              "default": "null",
               "inheritedFrom": {
                 "name": "LtnElement",
                 "module": "src/LtnElement.ts"
@@ -518,7 +472,7 @@
               "name": "_queryService",
               "return": {
                 "type": {
-                  "text": "T | null"
+                  "text": "T | undefined"
                 }
               },
               "parameters": [
@@ -550,7 +504,7 @@
               "name": "_getService",
               "return": {
                 "type": {
-                  "text": "T | null"
+                  "text": "T | undefined"
                 }
               },
               "parameters": [
@@ -684,7 +638,7 @@
               "privacy": "private",
               "return": {
                 "type": {
-                  "text": "LtnElement | null"
+                  "text": "LtnElement | undefined"
                 }
               },
               "inheritedFrom": {
@@ -698,7 +652,7 @@
               "privacy": "private",
               "return": {
                 "type": {
-                  "text": "LtnElement | null"
+                  "text": "LtnElement | undefined"
                 }
               },
               "parameters": [
@@ -709,24 +663,6 @@
                   }
                 }
               ],
-              "inheritedFrom": {
-                "name": "LtnElement",
-                "module": "src/LtnElement.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "LtnElement",
-            "module": "/src/LtnElement.js"
-          },
-          "attributes": [
-            {
-              "name": "logLevel",
-              "type": {
-                "text": "string"
-              },
-              "default": "'info'",
-              "fieldName": "logLevel",
               "inheritedFrom": {
                 "name": "LtnElement",
                 "module": "src/LtnElement.ts"
@@ -781,7 +717,7 @@
               "name": "getNamedService",
               "return": {
                 "type": {
-                  "text": "T | null"
+                  "text": "T | undefined"
                 }
               },
               "parameters": [
@@ -804,7 +740,7 @@
               "name": "getService",
               "return": {
                 "type": {
-                  "text": "T | null"
+                  "text": "T | undefined"
                 }
               },
               "parameters": [
@@ -826,7 +762,7 @@
               "privacy": "private",
               "return": {
                 "type": {
-                  "text": "T | null"
+                  "text": "T | undefined"
                 }
               },
               "parameters": [
@@ -850,7 +786,7 @@
               "privacy": "private",
               "return": {
                 "type": {
-                  "text": "LtnTrader | null"
+                  "text": "LtnTrader | undefined"
                 }
               }
             },
@@ -883,10 +819,9 @@
               "kind": "field",
               "name": "_root",
               "type": {
-                "text": "LtnElement | null"
+                "text": "LtnElement | undefined"
               },
               "privacy": "protected",
-              "default": "null",
               "inheritedFrom": {
                 "name": "LtnElement",
                 "module": "src/LtnElement.ts"
@@ -936,7 +871,7 @@
               "name": "_queryService",
               "return": {
                 "type": {
-                  "text": "T | null"
+                  "text": "T | undefined"
                 }
               },
               "parameters": [
@@ -968,7 +903,7 @@
               "name": "_getService",
               "return": {
                 "type": {
-                  "text": "T | null"
+                  "text": "T | undefined"
                 }
               },
               "parameters": [
@@ -1102,7 +1037,7 @@
               "privacy": "private",
               "return": {
                 "type": {
-                  "text": "LtnElement | null"
+                  "text": "LtnElement | undefined"
                 }
               },
               "inheritedFrom": {
@@ -1116,7 +1051,7 @@
               "privacy": "private",
               "return": {
                 "type": {
-                  "text": "LtnElement | null"
+                  "text": "LtnElement | undefined"
                 }
               },
               "parameters": [
