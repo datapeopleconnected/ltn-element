@@ -48,6 +48,15 @@
             },
             {
               "kind": "field",
+              "name": "LtnElementVersion",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "public",
+              "default": "1"
+            },
+            {
+              "kind": "field",
               "name": "logLevel",
               "type": {
                 "text": "string"
@@ -96,6 +105,19 @@
                   "name": "Type",
                   "type": {
                     "text": "new () => T"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_setLogLevel",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "level",
+                  "type": {
+                    "text": "LogLevel"
                   }
                 }
               ]
@@ -467,6 +489,19 @@
             },
             {
               "kind": "field",
+              "name": "LtnElementVersion",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "public",
+              "default": "1",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "field",
               "name": "logLevel",
               "type": {
                 "text": "string"
@@ -523,6 +558,23 @@
                   "name": "Type",
                   "type": {
                     "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_setLogLevel",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "level",
+                  "type": {
+                    "text": "LogLevel"
                   }
                 }
               ],
@@ -855,6 +907,19 @@
             },
             {
               "kind": "field",
+              "name": "LtnElementVersion",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "public",
+              "default": "1",
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "field",
               "name": "logLevel",
               "type": {
                 "text": "string"
@@ -911,6 +976,23 @@
                   "name": "Type",
                   "type": {
                     "text": "new () => T"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_setLogLevel",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "level",
+                  "type": {
+                    "text": "LogLevel"
                   }
                 }
               ],
@@ -1119,6 +1201,30 @@
           "declaration": {
             "name": "LtnService",
             "module": "./LtnService.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LtnLogger",
+          "declaration": {
+            "name": "LtnLogger",
+            "module": "./LtnLogger.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LtnLogLevel",
+          "declaration": {
+            "name": "LtnLogLevel",
+            "module": "./LtnLogger.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LtnLogLevelStrings",
+          "declaration": {
+            "name": "LtnLogLevelStrings",
+            "module": "./LtnLogger.js"
           }
         }
       ]
