@@ -1098,6 +1098,14 @@
             "name": "LtnTrader",
             "module": "src/LtnTrader.ts"
           }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ltn-trader",
+          "declaration": {
+            "name": "LtnTrader",
+            "module": "src/LtnTrader.ts"
+          }
         }
       ]
     },
@@ -1160,21 +1168,6 @@
           "declaration": {
             "name": "LtnLogLevelStrings",
             "module": "./LtnLogger.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/ltn-trader.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "ltn-trader",
-          "declaration": {
-            "name": "LtnTrader",
-            "module": "/src/LtnTrader.js"
           }
         }
       ]
