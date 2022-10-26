@@ -8,9 +8,11 @@ import {
 } from './LtnLogger.js';
 
 interface LtnTrader {
+  // eslint-disable-next-line no-use-before-define
   getService<T extends LtnElement>(Type: new () => T): T | undefined;
 }
 
+// eslint-disable-next-line no-shadow
 export enum LtnElementScope {
   ROOT = 'ROOT',
   AGGREGATE = 'AGGREGATE',
@@ -49,7 +51,7 @@ export class LtnElement extends LitElement {
     let service: T | undefined;
     this._debug(scope, `${this.constructor.name} === ${Type.name}`);
     if (this.constructor.name === Type.name) {
-      if (name === '' || name === this.id) return (this as unknown) as T;
+      if (name === '' || name === this.id) return this as unknown as T;
     }
 
     // in aggregate structures check your parent before checking children, but only immediate parent
@@ -58,7 +60,7 @@ export class LtnElement extends LitElement {
       if (parent) {
         if (parent.constructor.name === Type.name) {
           if (name === '' || name === parent.id) {
-            return (parent as unknown) as T;
+            return parent as unknown as T;
           }
         }
       }
@@ -92,7 +94,7 @@ export class LtnElement extends LitElement {
         result = parentEl._traderStack.reduce<T | undefined>((curr, next) => {
           if (curr) return curr;
           return next.getService(Type);
-        }, (undefined as unknown) as T);
+        }, undefined as unknown as T);
 
         if (result) {
           break;
@@ -112,7 +114,7 @@ export class LtnElement extends LitElement {
   protected _setLogLevel(level: LogLevel) {
     this.__logger.level = level;
   }
-  
+
   protected _error(...args: unknown[]) {
     this?.__logger.error(...args);
   }
@@ -158,7 +160,7 @@ export class LtnElement extends LitElement {
         this._setLogLevel(LogLevel[logLevel]);
       }
     }
-  
+
     const logLabel: string | null = this.getAttribute('log-label');
     if (logLabel !== null) {
       this.__logger.label = logLabel.toLowerCase();

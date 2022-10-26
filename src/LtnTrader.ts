@@ -1,4 +1,5 @@
 import { html, css } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { LtnElement } from './LtnElement.js';
 
 export interface LtnTraderService {
@@ -6,6 +7,7 @@ export interface LtnTraderService {
   service: LtnElement;
 }
 
+@customElement('ltn-trader')
 export class LtnTrader extends LtnElement {
   private __services: Array<LtnTraderService>;
 
@@ -18,16 +20,6 @@ export class LtnTrader extends LtnElement {
   constructor() {
     super();
     this.__services = [];
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this._debug(`connectedCallback`);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this._debug(`disconnectedCallback`);
   }
 
   registerService(service: LtnTraderService) {

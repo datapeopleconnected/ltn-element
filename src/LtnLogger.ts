@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-shadow
 export enum LtnLogLevel {
   ERROR,
   WARN,
@@ -9,7 +10,9 @@ export type LtnLogLevelStrings = keyof typeof LtnLogLevel;
 
 export class LtnLogger {
   protected _level: LtnLogLevel = LtnLogLevel.INFO;
+
   private _label: string;
+
   private _disable = false;
 
   static disableLogging = false;
@@ -32,6 +35,7 @@ export class LtnLogger {
   }
 
   error(...args: unknown[]) {
+    // eslint-disable-next-line no-console
     console.error([this._label, ...args]);
   }
 
@@ -42,6 +46,7 @@ export class LtnLogger {
       this._level >= LtnLogLevel.WARN
     ) {
       const args: unknown[] = ['[WARN]', `[${this._label}]`, ..._args];
+      // eslint-disable-next-line no-console
       console.warn(...args);
     }
   }
@@ -53,6 +58,7 @@ export class LtnLogger {
       this._level >= LtnLogLevel.INFO
     ) {
       const args: unknown[] = ['[INFO]', `[${this._label}]`, ..._args];
+      // eslint-disable-next-line no-console
       console.info(...args);
     }
   }
@@ -64,6 +70,7 @@ export class LtnLogger {
       this._level >= LtnLogLevel.DEBUG
     ) {
       const args: unknown[] = ['[DEBUG]', `[${this._label}]`, ..._args];
+      // eslint-disable-next-line no-console
       console.debug(...args);
     }
   }
