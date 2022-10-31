@@ -4,6 +4,69 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "stories/index.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Regular"
+        },
+        {
+          "kind": "variable",
+          "name": "CustomTitle"
+        },
+        {
+          "kind": "variable",
+          "name": "CustomCounter"
+        },
+        {
+          "kind": "variable",
+          "name": "SlottedContent"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Regular",
+          "declaration": {
+            "name": "Regular",
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CustomTitle",
+          "declaration": {
+            "name": "CustomTitle",
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CustomCounter",
+          "declaration": {
+            "name": "CustomCounter",
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SlottedContent",
+          "declaration": {
+            "name": "SlottedContent",
+            "module": "stories/index.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/LtnElement.ts",
       "declarations": [
         {
@@ -372,25 +435,79 @@
           "kind": "class",
           "description": "",
           "name": "LtnService",
-          "superclass": {
-            "name": "LtnElement",
-            "module": "/src/LtnElement.js"
-          },
-          "attributes": [
-            {
-              "name": "logLevel",
-              "type": {
-                "text": "string"
-              },
-              "default": "'info'",
-              "fieldName": "logLevel",
-              "inheritedFrom": {
-                "name": "LtnElement",
-                "module": "src/LtnElement.ts"
-              }
-            }
-          ],
           "members": [
+            {
+              "kind": "field",
+              "name": "_subscriptions",
+              "type": {
+                "text": "{[index: string]: {event: string, cb: Function}}"
+              },
+              "privacy": "protected",
+              "default": "{}"
+            },
+            {
+              "kind": "method",
+              "name": "generateId",
+              "static": true,
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "eventSubscribe",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "cb",
+                  "type": {
+                    "text": "Function"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "eventUnsubscribe",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dispatchCustomEvent",
+              "parameters": [
+                {
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "CustomEventInit"
+                  }
+                }
+              ]
+            },
             {
               "kind": "field",
               "name": "__logger",
@@ -663,6 +780,32 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "eventName",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "LtnElement",
+            "module": "/src/LtnElement.js"
+          },
+          "attributes": [
+            {
+              "name": "logLevel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'info'",
+              "fieldName": "logLevel",
               "inheritedFrom": {
                 "name": "LtnElement",
                 "module": "src/LtnElement.ts"
@@ -1098,14 +1241,6 @@
             "name": "LtnTrader",
             "module": "src/LtnTrader.ts"
           }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "ltn-trader",
-          "declaration": {
-            "name": "LtnTrader",
-            "module": "src/LtnTrader.ts"
-          }
         }
       ]
     },
@@ -1174,63 +1309,15 @@
     },
     {
       "kind": "javascript-module",
-      "path": "stories/index.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "Regular"
-        },
-        {
-          "kind": "variable",
-          "name": "CustomTitle"
-        },
-        {
-          "kind": "variable",
-          "name": "CustomCounter"
-        },
-        {
-          "kind": "variable",
-          "name": "SlottedContent"
-        }
-      ],
+      "path": "src/components/ltn-trader.ts",
+      "declarations": [],
       "exports": [
         {
-          "kind": "js",
-          "name": "default",
+          "kind": "custom-element-definition",
+          "name": "ltn-trader",
           "declaration": {
-            "module": "stories/index.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Regular",
-          "declaration": {
-            "name": "Regular",
-            "module": "stories/index.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CustomTitle",
-          "declaration": {
-            "name": "CustomTitle",
-            "module": "stories/index.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CustomCounter",
-          "declaration": {
-            "name": "CustomCounter",
-            "module": "stories/index.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SlottedContent",
-          "declaration": {
-            "name": "SlottedContent",
-            "module": "stories/index.stories.ts"
+            "name": "LtnTrader",
+            "module": "/src/LtnTrader.js"
           }
         }
       ]
