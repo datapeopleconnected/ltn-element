@@ -4,6 +4,7 @@ export enum LtnLogLevel {
   WARN,
   INFO,
   DEBUG,
+  SYS,
 }
 
 export type LtnLogLevelStrings = keyof typeof LtnLogLevel;
@@ -70,6 +71,18 @@ export class LtnLogger {
       this._level >= LtnLogLevel.DEBUG
     ) {
       const args: unknown[] = ['[DEBUG]', `[${this._label}]`, ..._args];
+      // eslint-disable-next-line no-console
+      console.debug(...args);
+    }
+  }
+
+  sys(..._args: unknown[]) {
+    if (
+      LtnLogger.disableLogging === false &&
+      this._disable === false &&
+      this._level >= LtnLogLevel.SYS
+    ) {
+      const args: unknown[] = ['[SYS]', `[${this._label}]`, ..._args];
       // eslint-disable-next-line no-console
       console.debug(...args);
     }

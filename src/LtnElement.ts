@@ -40,7 +40,7 @@ export class LtnElement extends LitElement {
     this.__initRoot();
     this.__initLogger();
 
-    this._debug(`Scope:${this.__scope}`);
+    this._sys(`Scope:${this.__scope}`);
   }
 
   _queryService<T extends LtnElement>(
@@ -49,7 +49,7 @@ export class LtnElement extends LitElement {
     name = ''
   ): T | undefined {
     let service: T | undefined;
-    this._debug(scope, `${this.constructor.name} === ${Type.name}`);
+    this._sys(scope, `${this.constructor.name} === ${Type.name}`);
     if (this.constructor.name === Type.name) {
       if (name === '' || name === this.id) return this as unknown as T;
     }
@@ -85,7 +85,7 @@ export class LtnElement extends LitElement {
     while (parent !== null) {
       if ((parent as LtnElement).LtnElementVersion) {
         const parentEl: LtnElement = parent as LtnElement;
-        this._debug(
+        this._sys(
           `_getService`,
           parentEl,
           parentEl._traderStack[0],
@@ -131,13 +131,17 @@ export class LtnElement extends LitElement {
     this?.__logger.debug(...args);
   }
 
+  protected _sys(...args: unknown[]) {
+    this?.__logger.sys(...args);
+  }
+
   private __initRoot() {
-    this._debug('__initRoot', this.__scope);
+    this._sys('__initRoot', this.__scope);
     if (this.__scope === LtnElementScope.ROOT) {
       this._root = this;
     } else {
       this._root = this.__queryParentScope(LtnElementScope.ROOT);
-      this._debug('__initRoot', this._root);
+      this._sys('__initRoot', this._root);
       if (this._root === null) {
         throw new Error(`Missing root element`);
       }

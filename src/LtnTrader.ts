@@ -36,7 +36,7 @@ export class LtnTrader extends LtnElement {
     serviceName = ''
   ): T | undefined {
     let service = this.__findService(Type, serviceName);
-    // this._debug(this.__services);
+    // this._sys(this.__services);
     while (service === undefined) {
       const trader = this._findParentTrader();
       if (trader === undefined) break;
