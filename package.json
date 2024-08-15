@@ -1,8 +1,8 @@
 {
   "name": "@lighten/ltn-element",
   "description": "Webcomponent ltn-element following open-wc recommendations",
-  "license": "MIT",
-  "author": "ltn-element",
+  "license": "AGPL-3.0-or-later",
+  "author": "Data People Connected LTD",
   "version": "0.0.6",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",
@@ -14,6 +14,7 @@
     "analyze": "cem analyze --litelement",
     "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
     "build": "tsc && npm run analyze -- --exclude dist",
+    "licence-check": "./.husky/licence-check",
     "watch": "tsc --watch --preserveWatchOutput",
     "build:watch": "tsc --watch --preserveWatchOutput",
     "prepublish": "tsc && npm run analyze -- --exclude dist",
@@ -22,7 +23,8 @@
     "test": "tsc && wtr --coverage",
     "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
     "storybook": "tsc && npm run analyze -- --exclude dist && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds -c .storybook/server.mjs\"",
-    "storybook:build": "tsc && npm run analyze -- --exclude dist && build-storybook"
+    "storybook:build": "tsc && npm run analyze -- --exclude dist && build-storybook",
+    "prepare": "husky install && [ -f ./.husky/nvm-fix ] && ./.husky/nvm-fix || true"
   },
   "dependencies": {
     "lit": "^2.4.1",
@@ -32,8 +34,8 @@
     "@custom-elements-manifest/analyzer": "^0.6.6",
     "@open-wc/eslint-config": "^9.0.0",
     "@open-wc/testing": "^3.1.7",
-    "@types/uuid": "^8.3.4",
     "@types/node": "^18.11.9",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
     "@web/dev-server": "^0.1.35",
@@ -42,7 +44,7 @@
     "concurrently": "^7.6.0",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
-    "husky": "^8.0.2",
+    "husky": "^9.1.4",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "tslib": "^2.4.1",
@@ -60,9 +62,7 @@
     ],
     "rules": {
       "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "error"
-      ],
+      "@typescript-eslint/no-unused-vars": 2,
       "import/no-unresolved": "off",
       "import/extensions": [
         "error",

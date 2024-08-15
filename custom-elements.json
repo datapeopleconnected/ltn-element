@@ -4,69 +4,6 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "stories/index.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "Regular"
-        },
-        {
-          "kind": "variable",
-          "name": "CustomTitle"
-        },
-        {
-          "kind": "variable",
-          "name": "CustomCounter"
-        },
-        {
-          "kind": "variable",
-          "name": "SlottedContent"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "stories/index.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Regular",
-          "declaration": {
-            "name": "Regular",
-            "module": "stories/index.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CustomTitle",
-          "declaration": {
-            "name": "CustomTitle",
-            "module": "stories/index.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CustomCounter",
-          "declaration": {
-            "name": "CustomCounter",
-            "module": "stories/index.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SlottedContent",
-          "declaration": {
-            "name": "SlottedContent",
-            "module": "stories/index.stories.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/LtnElement.ts",
       "declarations": [
         {
@@ -226,6 +163,19 @@
             {
               "kind": "method",
               "name": "_debug",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_sys",
               "privacy": "protected",
               "parameters": [
                 {
@@ -404,6 +354,18 @@
             {
               "kind": "method",
               "name": "debug",
+              "parameters": [
+                {
+                  "name": "_args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "sys",
               "parameters": [
                 {
                   "name": "_args",
@@ -708,6 +670,23 @@
             {
               "kind": "method",
               "name": "_debug",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_sys",
               "privacy": "protected",
               "parameters": [
                 {
@@ -1149,6 +1128,23 @@
             },
             {
               "kind": "method",
+              "name": "_sys",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "args",
+                  "type": {
+                    "text": "unknown[]"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "LtnElement",
+                "module": "src/LtnElement.ts"
+              }
+            },
+            {
+              "kind": "method",
               "name": "__initRoot",
               "privacy": "private",
               "inheritedFrom": {
@@ -1303,6 +1299,69 @@
           "declaration": {
             "name": "LtnLogLevelStrings",
             "module": "./LtnLogger.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "stories/index.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Regular"
+        },
+        {
+          "kind": "variable",
+          "name": "CustomTitle"
+        },
+        {
+          "kind": "variable",
+          "name": "CustomCounter"
+        },
+        {
+          "kind": "variable",
+          "name": "SlottedContent"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Regular",
+          "declaration": {
+            "name": "Regular",
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CustomTitle",
+          "declaration": {
+            "name": "CustomTitle",
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CustomCounter",
+          "declaration": {
+            "name": "CustomCounter",
+            "module": "stories/index.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SlottedContent",
+          "declaration": {
+            "name": "SlottedContent",
+            "module": "stories/index.stories.ts"
           }
         }
       ]
