@@ -2,6 +2,24 @@
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
+## What this library is for
+
+`ltn-element` is a Lit-based utility library for building custom elements that can:
+
+- organize component trees with explicit scopes (`ROOT`, `AGGREGATE`, `COMPOSITE`, `CHILD`),
+- discover and share services across parent/child and shadow DOM boundaries,
+- communicate through lightweight event subscription/dispatch patterns,
+- and use consistent leveled logging for diagnostics.
+
+The package exposes four main building blocks:
+
+- `LtnElement`: base class that adds scope, root discovery, and service lookup helpers on top of `LitElement`.
+- `LtnTrader`: hidden service registry/locator element used to register and resolve services by type (and optional name).
+- `LtnService`: service-oriented base class with subscribe/unsubscribe and custom event dispatch helpers.
+- `LtnLogger`: logger with `ERROR`, `WARN`, `INFO`, `DEBUG`, and `SYS` levels.
+
+In short, this library provides infrastructure for larger Lit component systems where components need structured composition, shared services, and observable behavior.
+
 ## Installation
 
 ```bash
