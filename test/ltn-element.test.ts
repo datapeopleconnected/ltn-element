@@ -1,3 +1,21 @@
+/**
+ * Ltn Element
+ * Copyright (C) 2016-2026 Data People Connected LTD.
+ * <https://www.dpc-ltd.com/>
+ *
+ * This file is part of Ltn Element.
+ * Ltn Element is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public Licence as published by the Free Software
+ * Foundation, either version 3 of the Licence, or (at your option) any later version.
+ * Ltn Element is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Affero General Public Licence for more details.
+ * You should have received a copy of the GNU Affero General Public Licence along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* eslint-disable max-classes-per-file */
+
 import { aTimeout, expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
 
@@ -16,7 +34,9 @@ class TestLtnElement extends LtnElement {
     return this._root;
   }
 
-  addTrader(trader: { getService<T extends LtnElement>(Type: new () => T): T | undefined }) {
+  addTrader(trader: {
+    getService<T extends LtnElement>(Type: new () => T): T | undefined;
+  }) {
     this._traderStack.push(trader);
   }
 
@@ -63,6 +83,7 @@ class QueryRootElement extends TestLtnElement {
 class ShadowHostElement extends HTMLElement {
   connectedCallback() {
     if (!this.shadowRoot) {
+      // eslint-disable-next-line wc/attach-shadow-constructor
       this.attachShadow({ mode: 'open' });
     }
 
@@ -122,7 +143,11 @@ describe('LtnElement', () => {
     const child = root.querySelector('#child') as TestLtnElement;
     const parent = root.querySelector('#parent') as TestLtnElement;
 
-    const service = child.query(TestLtnElement, LtnElementScope.AGGREGATE, 'parent');
+    const service = child.query(
+      TestLtnElement,
+      LtnElementScope.AGGREGATE,
+      'parent'
+    );
     expect(service).to.equal(parent);
   });
 
@@ -145,9 +170,15 @@ describe('LtnElement', () => {
 
     await aTimeout(0);
     const host = root.querySelector('#host') as ShadowHostElement;
-    const shadowChild = host.shadowRoot?.querySelector('#shadow-child') as TestLtnElement;
+    const shadowChild = host.shadowRoot?.querySelector(
+      '#shadow-child'
+    ) as TestLtnElement;
 
-    const service = shadowChild.query(TestLtnElement, LtnElementScope.AGGREGATE, 'root');
+    const service = shadowChild.query(
+      TestLtnElement,
+      LtnElementScope.AGGREGATE,
+      'root'
+    );
     expect(service).to.equal(root);
     expect(shadowChild.rootRef()).to.equal(root);
   });
@@ -161,11 +192,17 @@ describe('LtnElement', () => {
 
     await aTimeout(0);
     const host = root.querySelector('#host') as ShadowHostElement;
-    const shadowChild = host.shadowRoot?.querySelector('#shadow-child') as TestLtnElement;
-    const service = document.createElement('test-ltn-element') as TestLtnElement;
+    const shadowChild = host.shadowRoot?.querySelector(
+      '#shadow-child'
+    ) as TestLtnElement;
+    const service = document.createElement(
+      'test-ltn-element'
+    ) as TestLtnElement;
 
     const traderWith = (result?: TestLtnElement) => ({
-      getService: <T extends LtnElement>(_Type: new () => T) => result as unknown as T | undefined,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      getService: <T extends LtnElement>(_Type: new () => T) =>
+        result as unknown as T | undefined,
     });
 
     root.addTrader(traderWith(undefined));
@@ -178,7 +215,11 @@ describe('LtnElement', () => {
 
   it('applies log-label and log-disable attributes', async () => {
     const el = await fixture<TestLtnElement>(
-      html`<test-ltn-element scope="ROOT" log-label="MyLabel" log-disable></test-ltn-element>`
+      html`<test-ltn-element
+        scope="ROOT"
+        log-label="MyLabel"
+        log-disable
+      ></test-ltn-element>`
     );
 
     const originalWarn = console.warn;
@@ -197,7 +238,11 @@ describe('LtnElement', () => {
 
   it('routes protected logger wrappers to logger methods', async () => {
     const el = await fixture<TestLtnElement>(
-      html`<test-ltn-element scope="ROOT" .logLevel=${'sys'} log-label="MixedCase"></test-ltn-element>`
+      html`<test-ltn-element
+        scope="ROOT"
+        .logLevel=${'sys'}
+        log-label="MixedCase"
+      ></test-ltn-element>`
     );
 
     const originalError = console.error;
