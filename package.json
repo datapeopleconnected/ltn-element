@@ -23,7 +23,7 @@
     "test": "npm run build && wtr --coverage",
     "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
     "check": "npm run lint && npm run format && npm run licence-check",
-    "prepublish": "tsc && npm run analyze -- --exclude dist",
+    "prepublishOnly": "tsc && npm run analyze -- --exclude dist",
     "prepare": "husky && [ -f ./.husky/nvm-fix ] && ./.husky/nvm-fix || true"
   },
   "dependencies": {
@@ -48,11 +48,6 @@
     "typescript": "^5.6.3"
   },
   "customElements": "custom-elements.json",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.ts": [
       "eslint --fix",
