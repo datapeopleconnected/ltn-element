@@ -3,12 +3,15 @@
   "description": "Webcomponent ltn-element following open-wc recommendations",
   "license": "AGPL-3.0-or-later",
   "author": "Data People Connected LTD",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",
   "exports": {
     ".": "./dist/src/index.js",
     "./ltn-trader.js": "./dist/src/components/ltn-trader.js"
+  },
+  "engines": {
+    "node": ">=24"
   },
   "scripts": {
     "analyze": "cem analyze --litelement",

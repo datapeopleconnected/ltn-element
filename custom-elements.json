@@ -1308,21 +1308,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/ltn-trader.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "ltn-trader",
-          "declaration": {
-            "name": "LtnTrader",
-            "module": "/src/LtnTrader.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "coverage/lcov-report/block-navigation.js",
       "declarations": [],
       "exports": []
@@ -1338,6 +1323,21 @@
       "path": "coverage/lcov-report/sorter.js",
       "declarations": [],
       "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ltn-trader.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "ltn-trader",
+          "declaration": {
+            "name": "LtnTrader",
+            "module": "/src/LtnTrader.js"
+          }
+        }
+      ]
     }
   ]
 }
