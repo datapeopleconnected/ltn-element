@@ -28,7 +28,6 @@ export class LtnService extends LtnElement {
     [index: string]: { event: string; cb: Function };
   } = {};
 
-  // eslint-disable-next-line class-methods-use-this
   static generateId(): string {
     return v4();
   }
@@ -43,12 +42,11 @@ export class LtnService extends LtnElement {
     if (this._subscriptions[id]) delete this._subscriptions[id];
   }
 
-  // eslint-disable-next-line no-undef
   dispatchCustomEvent(eventName: string, options: CustomEventInit) {
     this.dispatchEvent(new CustomEvent(eventName, options));
 
     Object.values(this._subscriptions)
-      .filter(sub => sub.event === eventName)
-      .forEach(sub => sub.cb(options.detail));
+      .filter((sub) => sub.event === eventName)
+      .forEach((sub) => sub.cb(options.detail));
   }
 }

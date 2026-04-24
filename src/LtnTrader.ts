@@ -42,14 +42,14 @@ export class LtnTrader extends LtnElement {
 
   getNamedService<T extends LtnElement>(
     Type: new () => T,
-    serviceName: string
+    serviceName: string,
   ): T | undefined {
     return this.getService(Type, serviceName);
   }
 
   getService<T extends LtnElement>(
     Type: new () => T,
-    serviceName = ''
+    serviceName = '',
   ): T | undefined {
     let service = this.__findService(Type, serviceName);
     // this._sys(this.__services);
@@ -64,12 +64,12 @@ export class LtnTrader extends LtnElement {
 
   private __findService<T extends LtnElement>(
     Type: new () => T,
-    serviceName: string
+    serviceName: string,
   ): T | undefined {
     const services: T[] = this.__services
-      .filter(s => serviceName === '' || s.name === serviceName)
-      .map(s => s.service._queryService(Type))
-      .filter(s => s) as T[];
+      .filter((s) => serviceName === '' || s.name === serviceName)
+      .map((s) => s.service._queryService(Type))
+      .filter((s) => s) as T[];
 
     if (services.length > 0) return services[0];
     return undefined;

@@ -14,8 +14,6 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* eslint-disable max-classes-per-file */
-
 import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
 
@@ -38,7 +36,6 @@ class TraderBackedService extends LtnElement {
 class TraderShadowHost extends HTMLElement {
   connectedCallback() {
     if (!this.shadowRoot) {
-      // eslint-disable-next-line wc/attach-shadow-constructor
       this.attachShadow({ mode: 'open' });
     }
 
@@ -64,10 +61,10 @@ if (!customElements.get('trader-shadow-host')) {
 describe('LtnTrader', () => {
   it('registers and resolves a service by type', async () => {
     const trader = await fixture<TestLtnTrader>(
-      html`<test-ltn-trader scope="ROOT"></test-ltn-trader>`
+      html`<test-ltn-trader scope="ROOT"></test-ltn-trader>`,
     );
     const service = document.createElement(
-      'trader-backed-service'
+      'trader-backed-service',
     ) as TraderBackedService;
     service.id = 'svc-a';
 
@@ -79,10 +76,10 @@ describe('LtnTrader', () => {
 
   it('resolves a named service', async () => {
     const trader = await fixture<TestLtnTrader>(
-      html`<test-ltn-trader scope="ROOT"></test-ltn-trader>`
+      html`<test-ltn-trader scope="ROOT"></test-ltn-trader>`,
     );
     const service = document.createElement(
-      'trader-backed-service'
+      'trader-backed-service',
     ) as TraderBackedService;
 
     trader.registerService({ name: 'main', service });
@@ -93,7 +90,7 @@ describe('LtnTrader', () => {
 
   it('returns undefined when no matching service exists', async () => {
     const trader = await fixture<TestLtnTrader>(
-      html`<test-ltn-trader scope="ROOT"></test-ltn-trader>`
+      html`<test-ltn-trader scope="ROOT"></test-ltn-trader>`,
     );
 
     const resolved = trader.getNamedService(TraderBackedService, 'missing');
@@ -112,13 +109,13 @@ describe('LtnTrader', () => {
     `);
 
     const service = document.createElement(
-      'trader-backed-service'
+      'trader-backed-service',
     ) as TraderBackedService;
     parent.registerService({ name: 'main', service });
 
     const host = parent.querySelector('#host') as TraderShadowHost;
     const childTrader = host.shadowRoot?.querySelector(
-      'test-ltn-trader'
+      'test-ltn-trader',
     ) as TestLtnTrader;
 
     const resolved = childTrader.getService(TraderBackedService);
@@ -127,10 +124,10 @@ describe('LtnTrader', () => {
 
   it('renders nothing by default for the base ltn-trader element', async () => {
     const trader = await fixture<LtnTrader>(
-      html`<ltn-trader scope="ROOT"></ltn-trader>`
+      html`<ltn-trader scope="ROOT"></ltn-trader>`,
     );
     expect(trader.shadowRoot?.querySelectorAll('*:not(style)').length).to.equal(
-      0
+      0,
     );
   });
 });

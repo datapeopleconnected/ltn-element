@@ -32,7 +32,7 @@ if (!customElements.get('test-ltn-service')) {
 describe('LtnService', () => {
   it('subscribes and receives dispatched details', async () => {
     const service = await fixture<TestLtnService>(
-      html`<test-ltn-service scope="ROOT"></test-ltn-service>`
+      html`<test-ltn-service scope="ROOT"></test-ltn-service>`,
     );
 
     let payload: unknown;
@@ -51,7 +51,7 @@ describe('LtnService', () => {
 
   it('unsubscribes from events', async () => {
     const service = await fixture<TestLtnService>(
-      html`<test-ltn-service scope="ROOT"></test-ltn-service>`
+      html`<test-ltn-service scope="ROOT"></test-ltn-service>`,
     );
 
     let callCount = 0;
@@ -68,7 +68,7 @@ describe('LtnService', () => {
 
   it('dispatches a DOM CustomEvent', async () => {
     const service = await fixture<TestLtnService>(
-      html`<test-ltn-service scope="ROOT"></test-ltn-service>`
+      html`<test-ltn-service scope="ROOT"></test-ltn-service>`,
     );
 
     const eventPromise = oneEvent(service, 'service-event');

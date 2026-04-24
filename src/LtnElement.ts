@@ -24,11 +24,9 @@ import {
 } from './LtnLogger.js';
 
 interface LtnTrader {
-  // eslint-disable-next-line no-use-before-define
   getService<T extends LtnElement>(Type: new () => T): T | undefined;
 }
 
-// eslint-disable-next-line no-shadow
 export enum LtnElementScope {
   ROOT = 'ROOT',
   AGGREGATE = 'AGGREGATE',
@@ -41,7 +39,6 @@ export class LtnElement extends LitElement {
 
   private __scope: LtnElementScope = LtnElementScope.CHILD;
 
-  // eslint-disable-next-line no-use-before-define
   protected _root?: LtnElement;
 
   protected _traderStack: Array<LtnTrader> = [];
@@ -63,7 +60,7 @@ export class LtnElement extends LitElement {
   _queryService<T extends LtnElement>(
     Type: new () => T,
     scope: LtnElementScope = LtnElementScope.AGGREGATE,
-    name = ''
+    name = '',
   ): T | undefined {
     let service: T | undefined;
     this._sys(scope, `${this.constructor.name} === ${Type.name}`);
@@ -84,7 +81,7 @@ export class LtnElement extends LitElement {
     }
 
     const children = this?.shadowRoot?.childNodes;
-    children?.forEach(c => {
+    children?.forEach((c) => {
       if (service !== undefined || !(c as LtnElement).LtnElementVersion) return;
 
       const el = c as LtnElement;
@@ -106,12 +103,15 @@ export class LtnElement extends LitElement {
           `_getService`,
           parentEl,
           parentEl._traderStack[0],
-          parentEl._traderStack[0]?.getService(Type)
+          parentEl._traderStack[0]?.getService(Type),
         );
-        result = parentEl._traderStack.reduce<T | undefined>((curr, next) => {
-          if (curr) return curr;
-          return next.getService(Type);
-        }, undefined as unknown as T);
+        result = parentEl._traderStack.reduce<T | undefined>(
+          (curr, next) => {
+            if (curr) return curr;
+            return next.getService(Type);
+          },
+          undefined as unknown as T,
+        );
 
         if (result) {
           break;

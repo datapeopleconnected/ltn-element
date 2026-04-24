@@ -14,7 +14,6 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-// eslint-disable-next-line no-shadow
 export enum LtnLogLevel {
   ERROR,
   WARN,
@@ -52,7 +51,6 @@ export class LtnLogger {
   }
 
   error(...args: unknown[]) {
-    // eslint-disable-next-line no-console
     console.error([this._label, ...args]);
   }
 
@@ -63,7 +61,7 @@ export class LtnLogger {
       this._level >= LtnLogLevel.WARN
     ) {
       const args: unknown[] = ['[WARN]', `[${this._label}]`, ..._args];
-      // eslint-disable-next-line no-console
+
       console.warn(...args);
     }
   }
@@ -75,7 +73,7 @@ export class LtnLogger {
       this._level >= LtnLogLevel.INFO
     ) {
       const args: unknown[] = ['[INFO]', `[${this._label}]`, ..._args];
-      // eslint-disable-next-line no-console
+
       console.info(...args);
     }
   }
@@ -87,7 +85,7 @@ export class LtnLogger {
       this._level >= LtnLogLevel.DEBUG
     ) {
       const args: unknown[] = ['[DEBUG]', `[${this._label}]`, ..._args];
-      // eslint-disable-next-line no-console
+
       console.debug(...args);
     }
   }
@@ -99,7 +97,7 @@ export class LtnLogger {
       this._level >= LtnLogLevel.SYS
     ) {
       const args: unknown[] = ['[SYS]', `[${this._label}]`, ..._args];
-      // eslint-disable-next-line no-console
+
       console.debug(...args);
     }
   }

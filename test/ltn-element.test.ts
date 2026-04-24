@@ -14,8 +14,6 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* eslint-disable max-classes-per-file */
-
 import { aTimeout, expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
 
@@ -25,7 +23,7 @@ class TestLtnElement extends LtnElement {
   query<T extends LtnElement>(
     Type: new () => T,
     scope: LtnElementScope = LtnElementScope.AGGREGATE,
-    name = ''
+    name = '',
   ) {
     return this._queryService(Type, scope, name);
   }
@@ -83,7 +81,6 @@ class QueryRootElement extends TestLtnElement {
 class ShadowHostElement extends HTMLElement {
   connectedCallback() {
     if (!this.shadowRoot) {
-      // eslint-disable-next-line wc/attach-shadow-constructor
       this.attachShadow({ mode: 'open' });
     }
 
@@ -110,7 +107,7 @@ if (!customElements.get('shadow-host-element')) {
 describe('LtnElement', () => {
   it('sets itself as root when scope is ROOT', async () => {
     const el = await fixture<TestLtnElement>(
-      html`<test-ltn-element scope="ROOT"></test-ltn-element>`
+      html`<test-ltn-element scope="ROOT"></test-ltn-element>`,
     );
 
     expect(el.rootRef()).to.equal(el);
@@ -124,7 +121,7 @@ describe('LtnElement', () => {
 
   it('can resolve itself by type and id', async () => {
     const el = await fixture<TestLtnElement>(
-      html`<test-ltn-element scope="ROOT" id="self"></test-ltn-element>`
+      html`<test-ltn-element scope="ROOT" id="self"></test-ltn-element>`,
     );
 
     const service = el.query(TestLtnElement, LtnElementScope.AGGREGATE, 'self');
@@ -146,14 +143,14 @@ describe('LtnElement', () => {
     const service = child.query(
       TestLtnElement,
       LtnElementScope.AGGREGATE,
-      'parent'
+      'parent',
     );
     expect(service).to.equal(parent);
   });
 
   it('queries shadow-root children and respects scope filtering', async () => {
     const root = await fixture<QueryRootElement>(
-      html`<query-root-element scope="ROOT"></query-root-element>`
+      html`<query-root-element scope="ROOT"></query-root-element>`,
     );
 
     const service = root.query(TestLtnElement, LtnElementScope.CHILD, 'target');
@@ -171,13 +168,13 @@ describe('LtnElement', () => {
     await aTimeout(0);
     const host = root.querySelector('#host') as ShadowHostElement;
     const shadowChild = host.shadowRoot?.querySelector(
-      '#shadow-child'
+      '#shadow-child',
     ) as TestLtnElement;
 
     const service = shadowChild.query(
       TestLtnElement,
       LtnElementScope.AGGREGATE,
-      'root'
+      'root',
     );
     expect(service).to.equal(root);
     expect(shadowChild.rootRef()).to.equal(root);
@@ -193,14 +190,13 @@ describe('LtnElement', () => {
     await aTimeout(0);
     const host = root.querySelector('#host') as ShadowHostElement;
     const shadowChild = host.shadowRoot?.querySelector(
-      '#shadow-child'
+      '#shadow-child',
     ) as TestLtnElement;
     const service = document.createElement(
-      'test-ltn-element'
+      'test-ltn-element',
     ) as TestLtnElement;
 
     const traderWith = (result?: TestLtnElement) => ({
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       getService: <T extends LtnElement>(_Type: new () => T) =>
         result as unknown as T | undefined,
     });
@@ -219,7 +215,7 @@ describe('LtnElement', () => {
         scope="ROOT"
         log-label="MyLabel"
         log-disable
-      ></test-ltn-element>`
+      ></test-ltn-element>`,
     );
 
     const originalWarn = console.warn;
@@ -242,7 +238,7 @@ describe('LtnElement', () => {
         scope="ROOT"
         .logLevel=${'sys'}
         log-label="MixedCase"
-      ></test-ltn-element>`
+      ></test-ltn-element>`,
     );
 
     const originalError = console.error;
