@@ -41,6 +41,7 @@ export class LtnElement extends LitElement {
 
   private __scope: LtnElementScope = LtnElementScope.CHILD;
 
+  // eslint-disable-next-line no-use-before-define
   protected _root?: LtnElement;
 
   protected _traderStack: Array<LtnTrader> = [];
@@ -158,7 +159,7 @@ export class LtnElement extends LitElement {
     } else {
       this._root = this.__queryParentScope(LtnElementScope.ROOT);
       this._sys('__initRoot', this._root);
-      if (this._root === null) {
+      if (this._root === undefined) {
         throw new Error(`Missing root element`);
       }
     }

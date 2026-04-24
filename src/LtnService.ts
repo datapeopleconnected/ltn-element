@@ -24,8 +24,9 @@ export interface LtnTraderService {
 }
 
 export class LtnService extends LtnElement {
-
-  protected _subscriptions: {[index: string]: {event: string, cb: Function}} = {};
+  protected _subscriptions: {
+    [index: string]: { event: string; cb: Function };
+  } = {};
 
   // eslint-disable-next-line class-methods-use-this
   static generateId(): string {
@@ -34,7 +35,7 @@ export class LtnService extends LtnElement {
 
   eventSubscribe(event: string, cb: Function) {
     const id = LtnService.generateId();
-    this._subscriptions[id] = {event, cb};
+    this._subscriptions[id] = { event, cb };
     return id;
   }
 
@@ -47,7 +48,7 @@ export class LtnService extends LtnElement {
     this.dispatchEvent(new CustomEvent(eventName, options));
 
     Object.values(this._subscriptions)
-      .filter((sub) => sub.event === eventName)
-      .forEach((sub) => sub.cb(options.detail));
+      .filter(sub => sub.event === eventName)
+      .forEach(sub => sub.cb(options.detail));
   }
 }

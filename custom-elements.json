@@ -402,7 +402,7 @@
               "kind": "field",
               "name": "_subscriptions",
               "type": {
-                "text": "{[index: string]: {event: string, cb: Function}}"
+                "text": "{\n    [index: string]: { event: string; cb: Function };\n  }"
               },
               "privacy": "protected",
               "default": "{}"
@@ -1365,6 +1365,24 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/block-navigation.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/prettify.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/sorter.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
